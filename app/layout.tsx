@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Code Editor",
+  title: "Syntax Studio",
   description: "An Online SaaS Code Editor"
 };
 
