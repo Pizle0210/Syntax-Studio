@@ -28,11 +28,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-          <ConvexClientProvider>
+      <ConvexClientProvider>
         <html lang="en">
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col h-screen justify-between`}
-            >
+            className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen justify-between bg-gradient-to-b from-black to-gray-900 text-gray-100`}
+          >
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
