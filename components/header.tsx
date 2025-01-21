@@ -4,9 +4,7 @@ export default function Header() {
   return (
     <div>
         <SignedOut>
-            <SignInButton>
-                
-            </SignInButton>
+            <SignInButton />
         </SignedOut>
         <SignedIn>
             <UserButton/>
