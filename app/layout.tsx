@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClientProvider from "@/components/convex-client-provider";
@@ -33,7 +32,6 @@ export default function RootLayout({
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen justify-between bg-gradient-to-b from-black to-gray-900 text-gray-100`}
           >
-            <Header />
             <main className="flex-1">{children}</main>
             <Footer />
           </body>
