@@ -9,7 +9,7 @@ interface CodeEditorState {
   isRunning: boolean;
   error: string | null;
   editor: Monaco.editor.IStandaloneCodeEditor | null; // Properly typed Monaco editor instance
-  executionResult: null; // Adjust this type as per your execution result structure
+  executionResult: unknown; // Adjust this type as per your execution result structure
   output: string;
   getCode: () => string;
   setEditor: (editor: Monaco.editor.IStandaloneCodeEditor) => void;
