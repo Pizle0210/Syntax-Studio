@@ -1,5 +1,5 @@
 import { api } from "@/convex/_generated/api";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedIn } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { ConvexHttpClient } from "convex/browser";
 import { Blocks, Code2, Sparkles } from "lucide-react";
