@@ -33,7 +33,7 @@ export const LANGUAGE_CONFIG: LanguageConfig = {
   javascript: {
     id: "javascript",
     label: "JavaScript",
-    logoPath: "/javascript.png",
+    logoPath: "/js.png",
     pistonRuntime: { language: "javascript", version: "18.15.0" }, // api that we're gonna be using
     monacoLanguage: "javascript",
     defaultCode: `// JavaScript Playground
@@ -55,7 +55,7 @@ console.log('Sum of numbers:', sum);`,
   typescript: {
     id: "typescript",
     label: "TypeScript",
-    logoPath: "/typescript.png",
+    logoPath: "/ts.png",
     pistonRuntime: { language: "typescript", version: "5.0.3" },
     monacoLanguage: "typescript",
     defaultCode: `// TypeScript Playground
@@ -92,7 +92,7 @@ console.log('Sum of numbers:', math.sum());`,
   python: {
     id: "python",
     label: "Python",
-    logoPath: "/python.png",
+    logoPath: "/python.webp",
     pistonRuntime: { language: "python", version: "3.10.0" },
     monacoLanguage: "python",
     defaultCode: `# Python Playground
@@ -114,7 +114,7 @@ print(f"Sum of numbers: {numbers_sum}")`,
   java: {
     id: "java",
     label: "Java",
-    logoPath: "/java.png",
+    logoPath: "/java.webp",
     pistonRuntime: { language: "java", version: "15.0.2" },
     monacoLanguage: "java",
     defaultCode: `public class Main {
@@ -197,7 +197,7 @@ func main() {
   rust: {
     id: "rust",
     label: "Rust",
-    logoPath: "/rust.png",
+    logoPath: "/rust.jpg",
     pistonRuntime: { language: "rust", version: "1.68.2" },
     monacoLanguage: "rust",
     defaultCode: `fn main() {
@@ -230,7 +230,7 @@ func main() {
   cpp: {
     id: "cpp",
     label: "C++",
-    logoPath: "/cpp.png",
+    logoPath: "/C++.png",
     pistonRuntime: { language: "cpp", version: "10.2.0" },
     monacoLanguage: "cpp",
     defaultCode: `#include <iostream>
@@ -274,7 +274,7 @@ int main() {
   csharp: {
     id: "csharp",
     label: "C#",
-    logoPath: "/csharp.png",
+    logoPath: "/c-sharp.webp",
     pistonRuntime: { language: "csharp", version: "6.12.0" },
     monacoLanguage: "csharp",
     defaultCode: `using System;
@@ -329,7 +329,7 @@ puts "Sum of numbers: #{sum}"`,
   swift: {
     id: "swift",
     label: "Swift",
-    logoPath: "/swift.png",
+    logoPath: "/swift.jpeg",
     pistonRuntime: { language: "swift", version: "5.3.3" },
     monacoLanguage: "swift",
     defaultCode: `// Create array
