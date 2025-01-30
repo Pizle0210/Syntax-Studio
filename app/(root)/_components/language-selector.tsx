@@ -38,6 +38,12 @@ export default function LanguageSelector({ mode }: { mode: boolean }) {
 
   if (!mounted) return null;
 
+  const sortedLanguages = Object.values(LANGUAGE_CONFIG).sort((a, b) => {
+    if (a.id === language) return -1;
+    if (b.id === language) return 1;
+    return 0;
+  });
+
   return (
     <div className="relative" ref={dropdownRef}>
       <motion.button
@@ -87,7 +93,7 @@ export default function LanguageSelector({ mode }: { mode: boolean }) {
             </div>
 
             <div className="max-h-[280px] overflow-y-auto overflow-x-hidden">
-              {Object.values(LANGUAGE_CONFIG).map((lang, index) => {
+              {sortedLanguages.map((lang, index) => {
                 const isLocked = !mode && lang.id !== "javascript";
 
                 return (
@@ -99,7 +105,7 @@ export default function LanguageSelector({ mode }: { mode: boolean }) {
                     className="group relative px-2"
                   >
                     <button
-                      className={`relative flex w-full items-center gap-3 rounded-lg px-3 py-2.5 transition-all duration-200 ${language === lang.id ? "bg-blue-500/10 text-blue-400" : "text-gray-300"} ${isLocked ? "opacity-50" : "hover:bg-[#262637]"} `}
+                      className={`relative flex w-full items-center gap-3 rounded-lg px-3 py-2.5 transition-all duration-200 ${language === lang.id ? "bg-blue-500/10 text-blue-400" : "text-gray-300"} ${isLocked ? "opacity-30" : "hover:bg-[#1e1e2b]"} `}
                       onClick={() => handleLanguageSelect(lang.id)}
                       disabled={isLocked}
                     >
@@ -129,17 +135,20 @@ export default function LanguageSelector({ mode }: { mode: boolean }) {
                           className="absolute inset-0 rounded-lg border-2 border-blue-500/30"
                           transition={{
                             type: "spring",
-                            bounce: 0.2,
+                            bounce: 0.4,
                             duration: 0.6,
                           }}
                         />
                       )}
 
                       {isLocked ? (
-                        <Lock className="h-4 w-4 text-gray-500" />
+                        <Lock size={18} className="text-gray-500" />
                       ) : (
                         language === lang.id && (
-                          <Sparkles className="h-4 w-4 animate-pulse text-blue-400" />
+                          <Sparkles
+                            size={18}
+                            className="animate-pulse text-blue-400"
+                          />
                         )
                       )}
                     </button>
