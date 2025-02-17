@@ -76,7 +76,6 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
       }
       set({ editor });
     },
-
     setTheme: (theme: string) => {
       localStorage.setItem("editor-theme", theme);
       set({ theme });
@@ -130,6 +129,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
         console.log("data back from piston:", data);
 
+        // handle API errors
         if (data.message) {
           set({
             error: data.message,
@@ -138,6 +138,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
           return;
         }
 
+        // handle compilation error
         if (data.compile && data.compile.code !== 0) {
           const error = data.compile.stderr || data.compile.output;
           set({
@@ -164,6 +165,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
           return;
         }
 
+        // output
         const output = data.run.output;
         set({
           output: output.trim(),
@@ -174,7 +176,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
             error: null,
           },
         });
-      } catch (error) {
+      } catch (error:unknown) {
         console.log("Error running code:", error);
         set({
           error: "Error running code",
