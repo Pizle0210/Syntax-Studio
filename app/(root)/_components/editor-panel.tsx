@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import EditorPanelSkeleton from "./editor-panel-skeleton";
 import Image from "next/image";
 import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
+import ShareSnippetDialog from "./share-snippet-dialog";
 
 export default function EditorPanel() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -153,6 +154,9 @@ export default function EditorPanel() {
           {!clerk.loaded && <EditorPanelSkeleton />}
         </div>
       </div>
+      {isShareDialogOpen && (
+        <ShareSnippetDialog onClose={() => SetIsShareDialogOpen(false)} />
+      )}
     </div>
   );
 }
