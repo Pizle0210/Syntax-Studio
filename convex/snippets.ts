@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import type { Id } from "./_generated/dataModel";
 
 export const createSnippet = mutation({
   args: {
@@ -21,7 +20,7 @@ export const createSnippet = mutation({
     if (!user) throw new Error("User not found");
 
     const snippetId = await ctx.db.insert("snippets", {
-      userId: identity.subject as Id<"users">,
+      userId: identity.subject,
       userName: user.name,
       title: args.title,
       language: args.language,
@@ -31,9 +30,6 @@ export const createSnippet = mutation({
     return snippetId;
   },
 });
-
-
-
 
 
 
@@ -80,8 +76,6 @@ export const deleteSnippet = mutation({
 
 
 
-
-
 export const starSnippet = mutation({
   args: {
     snippetId: v.id("snippets"),
@@ -92,7 +86,7 @@ export const starSnippet = mutation({
 
     const existing = await ctx.db
       .query("stars")
-      .withIndex("by_user_Id_and_snippet_Id")
+      .withIndex('by_user_Id_and_snippet_Id')
       .filter(
         (q) =>
           q.eq(q.field("userId"), identity.subject) &&
@@ -101,10 +95,12 @@ export const starSnippet = mutation({
       .first();
 
     if (existing) {
+      // if the current user has already starred the snippet, remove the star
       await ctx.db.delete(existing._id);
     } else {
+      // if the current user has not starred the snippet, add a star
       await ctx.db.insert("stars", {
-        userId: identity.subject as Id<"users"> ,
+        userId: identity.subject,
         snippetId: args.snippetId,
       });
     }
@@ -174,32 +170,33 @@ export const getSnippets = query({
 
 
 
-// export const getSnippetById = query({
-//   args: { snippetId: v.id("snippets") },
-//   handler: async (ctx, args) => {
-//     const snippet = await ctx.db.get(args.snippetId);
-//     if (!snippet) throw new Error("Snippet not found");
+// get snippet by id
+export const getSnippetById = query({
+  args: { snippetId: v.id("snippets") },
+  handler: async (ctx, args) => {
+    const snippet = await ctx.db.get(args.snippetId);
+    if (!snippet) throw new Error("Snippet not found");
 
-//     return snippet;
-//   },
-// });
+    return snippet;
+  },
+});
 
 
 
+// get comments on snippet
+export const getComments = query({
+  args: { snippetId: v.id("snippets") },
+  handler: async (ctx, args) => {
+    const comments = await ctx.db
+      .query("snippetComment")
+      .withIndex("by_snippet_id")
+      .filter((q) => q.eq(q.field("snippetId"), args.snippetId))
+      .order("desc")
+      .collect();
 
-// export const getComments = query({
-//   args: { snippetId: v.id("snippets") },
-//   handler: async (ctx, args) => {
-//     const comments = await ctx.db
-//       .query("snippetComment")
-//       .withIndex("by_snippet_id")
-//       .filter((q) => q.eq(q.field("snippetId"), args.snippetId))
-//       .order("desc")
-//       .collect();
-
-//     return comments;
-//   },
-// });
+    return comments;
+  },
+});
 
 
 

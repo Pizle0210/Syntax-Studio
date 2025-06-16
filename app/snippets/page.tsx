@@ -40,11 +40,10 @@ export default function SnippetsPage() {
     return matchesSearch && matchesLanguage;
   });
 
-  console.log(languages);
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
       <NavigationHeader />
-
+      
       <div className="relative mx-auto max-w-7xl px-4 py-12">
         {/* Hero */}
         <div className="mx-auto mb-16 max-w-3xl text-center">

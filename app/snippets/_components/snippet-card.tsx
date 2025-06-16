@@ -6,11 +6,12 @@ import { useState } from "react";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Clock, StarIcon, Trash2, User } from "lucide-react";
+import { Clock, Trash2, User } from "lucide-react";
 import Image from "next/image";
 // import StarButton from "@/components/StarButton";
 import { api } from "@/convex/_generated/api";
 import { useToast } from "@/hooks/use-toast";
+import StarButton from "@/components/star-button";
 
 type LanguageConfig = Record<string, Language>;
 
@@ -87,7 +88,7 @@ export default function SnippetCard({
                 className="absolute right-5 top-5 z-10 flex items-center gap-4"
                 onClick={(e) => e.preventDefault()}
               >
-                <StarIcon />
+                <StarButton snippetId={snippet._id}/>
 
                 {user?.id === snippet.userId && (
                   <div className="z-10" onClick={(e) => e.preventDefault()}>
