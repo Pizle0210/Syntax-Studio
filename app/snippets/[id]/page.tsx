@@ -11,6 +11,8 @@ import { Editor } from "@monaco-editor/react";
 import { Clock, Code, MessageSquare, User } from "lucide-react";
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
+import CopyButton from "./_components/CopyButton";
+import Comments from "./_components/Comments";
 
 export default function SnippetDetailPage() {
   // Extract the snippet ID from the URL parameters
@@ -33,13 +35,13 @@ export default function SnippetDetailPage() {
           <div className="mb-6 rounded-2xl border border-[#ffffff0a] bg-[#121218] p-6 backdrop-blur-xl sm:p-8">
             <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
               <div className="flex items-center gap-4">
-                <div className="flex size-12 items-center justify-center rounded-xl bg-[#ffffff08] p-2.5">
+                <div className="flex size-16 items-center justify-center rounded-xl bg-[#ffffff08] p-2.5">
                   <Image
                     src={LANGUAGE_CONFIG[snippet.language].logoPath}
                     alt={`${snippet.language} logo`}
                     className="h-full w-full object-contain"
-                    height={48}
-                    width={48}
+                    height={58}
+                    width={58}
                   />
                 </div>
                 <div>
@@ -91,7 +93,7 @@ export default function SnippetDetailPage() {
                 <Code className="h-4 w-4" />
                 <span className="text-sm font-medium">Source Code</span>
               </div>
-              {/* <CopyButton code={snippet.code} /> */}
+              <CopyButton code={snippet.code} />
             </div>
             <Editor
               height="600px"
@@ -113,7 +115,7 @@ export default function SnippetDetailPage() {
             />
           </div>
 
-          {/* <Comments snippetId={snippet._id} /> */}
+          <Comments snippetId={snippet._id} />
         </div>
       </main>
     </div>
