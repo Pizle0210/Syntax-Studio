@@ -12,6 +12,7 @@ import { Clock, Code, MessageSquare, User } from "lucide-react";
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import CopyButton from "./_components/CopyButton";
+import Comments from "./_components/Comments";
 
 export default function SnippetDetailPage() {
   // Extract the snippet ID from the URL parameters
@@ -114,7 +115,7 @@ export default function SnippetDetailPage() {
             />
           </div>
 
-          {/* <Comments snippetId={snippet._id} /> */}
+          <Comments snippetId={snippet._id} />
         </div>
       </main>
     </div>
