@@ -1,5 +1,7 @@
 import { CodeIcon, SendIcon } from "lucide-react";
 import { useState } from "react";
+import CommentContent from "./CommentContent";
+import { Button } from "@/components/ui/button";
 
 type CommentFormProps = {
   onSubmit: (comment: string) => Promise<void>;
@@ -79,7 +81,7 @@ export default function CommentForm({ onSubmit, isSubmitting }: CommentFormProps
               Tab key inserts spaces • Preview your comment before posting
             </div>
           </div>
-          <button
+          <Button
             type="submit"
             disabled={isSubmitting || !comment.trim()}
             className="ml-auto flex items-center gap-2 rounded-lg bg-[#3b82f6] px-4 py-2 text-white transition-all hover:bg-[#2563eb] disabled:cursor-not-allowed disabled:opacity-50"
@@ -95,7 +97,7 @@ export default function CommentForm({ onSubmit, isSubmitting }: CommentFormProps
                 <span>Comment</span>
               </>
             )}
-          </button>
+          </Button>
         </div>
       </div>
     </form>
