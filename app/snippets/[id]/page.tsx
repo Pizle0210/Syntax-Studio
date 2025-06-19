@@ -21,7 +21,7 @@ export default function SnippetDetailPage() {
   const snippet = useQuery(api.snippets.getSnippetById, {
     snippetId: snippetId as Id<"snippets">,
   });
-
+const comments = useQuery(api.snippets.getComments, {snippetId: snippetId as Id<"snippets">}) || [];
   if (snippet === undefined) {
     return <SnippetLoadingSkeleton />;
   }
@@ -75,7 +75,7 @@ export default function SnippetDetailPage() {
                     </div>
                     <div className="flex items-center gap-2 text-[#8b8b8d]">
                       <MessageSquare className="h-4 w-4" />
-                      {/* <span>{comments?.length} comments</span> */}
+                      <span>{comments?.length} comments</span>
                     </div>
                   </div>
                 </div>
