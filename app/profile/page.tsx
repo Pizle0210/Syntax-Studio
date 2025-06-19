@@ -53,9 +53,8 @@ export default function ProfilePage() {
     },
     { initialNumItems: 3 },
   );
-  console.log(executions);
 
-  console.log(starredSnippets);
+  // Handle loading more executions
    const handleLoadMore = () => {
      if (executionStatus === "CanLoadMore") loadMore(2);
    };
@@ -140,7 +139,7 @@ export default function ProfilePage() {
                           <div className="relative">
                             <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 opacity-20 blur transition-opacity group-hover:opacity-30" />
                             <Image
-                              src={"/" + execution.language + ".png"}
+                              src={LANGUAGE_CONFIG[execution.language]?.logoPath || "/default.png"}
                               alt=""
                               className="relative z-10 rounded-lg object-cover"
                               width={40}
