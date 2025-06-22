@@ -9,7 +9,7 @@ interface UpgradeButtonProps {
 }
 
 const DEFAULT_URL =
-  "https://ytprogrammingstore.lemonsqueezy.com/buy/d459dddb-a233-4060-9e72-90a1a7740552";
+  "https://syntax-studio.lemonsqueezy.com/buy/13d65597-6034-402c-8fe0-849b0298a96e";
 export default function UpgradeButton({
   url = DEFAULT_URL,
   className = "",
