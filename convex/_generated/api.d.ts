@@ -16,6 +16,7 @@ import type {
 import type * as codeExecutions from "../codeExecutions.js";
 import type * as http from "../http.js";
 import type * as snippets from "../snippets.js";
+import type * as studioSyntax from "../studioSyntax.js";
 import type * as users from "../users.js";
 
 /**
@@ -30,6 +31,7 @@ declare const fullApi: ApiFromModules<{
   codeExecutions: typeof codeExecutions;
   http: typeof http;
   snippets: typeof snippets;
+  studioSyntax: typeof studioSyntax;
   users: typeof users;
 }>;
 export declare const api: FilterApi<
