@@ -1,5 +1,6 @@
 import NavigationHeader from "@/components/navigation-header";
-import { ArrowRight, Command, Link, Star } from "lucide-react";
+import { ArrowRight, Command, Star } from "lucide-react";
+import Link from "next/link";
 
 export default function ProPlanView() {
   return (

@@ -7,27 +7,18 @@ import { api, internal } from "./_generated/api";
 const http = httpRouter();
 
 http.route({
-  path: "/studio-syntax-webhook",
+  path: "/lemon-squeezy-webhook",
   method: "POST",
   handler: httpAction(async (ctx, request) => {
-    // const webhookSecret = process.env.LEMON_SQUEEZY_WEBHOOK_SECRET;
-    // if (!webhookSecret) {
-    //   throw new Error(
-    //     "Missing LEMON_SQUEEZY_WEBHOOK_SECRET environment variable",
-    //   );
-    // }
-
     const payloadString = await request.text();
-    const signature = request.headers.get("x-lemon-squeezy-signature");
+    const signature = request.headers.get("X-Signature");
 
     if (!signature) {
-      return new Response("Error occurred -- no signature header", {
-        status: 400,
-      });
+      return new Response("Missing X-Signature header", { status: 400 });
     }
 
     try {
-      const payload = await ctx.runAction(internal.studioSyntax.verifyWebhook, {
+      const payload = await ctx.runAction(internal.lemonSqueezy.verifyWebhook, {
         payload: payloadString,
         signature,
       });
@@ -43,9 +34,7 @@ http.route({
         });
 
         if (success) {
-          console.log(
-            `User upgraded to Pro: ${data.attributes.user_email} (Order ID: ${data.id})`,
-          );
+          // optionally do anything here
         }
       }
 
@@ -56,9 +45,6 @@ http.route({
     }
   }),
 });
-
-
-
 
 http.route({
   path: "/clerk-webhook",
@@ -101,8 +87,13 @@ http.route({
       // save the user to convex db
       const { id, email_addresses, first_name, last_name } = evt.data;
 
-      const email = email_addresses[0].email_address;
+      const email = email_addresses[0]?.email_address;
       const name = `${first_name || ""} ${last_name || ""}`.trim();
+
+      if (!email) {
+        console.error("Error: No email found for user.created event");
+        return new Response("Error: No email found", { status: 400 });
+      }
 
       try {
         await ctx.runMutation(api.users.syncUser, {
@@ -110,9 +101,10 @@ http.route({
           email,
           name,
         });
+        console.log(`User ${email} synced successfully`);
       } catch (error) {
-        console.log("Error creating user:", error);
-        return new Response("Error creating user", { status: 500 });
+        console.error("Error syncing user:", error);
+        return new Response("Error syncing user", { status: 500 });
       }
     }
 

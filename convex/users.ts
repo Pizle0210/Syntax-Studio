@@ -20,6 +20,9 @@ export const syncUser = mutation({
         name: args.name,
         isPro: false,
       });
+      console.log(`User ${args.email} added to the database`);
+    } else {
+      console.log(`User ${args.email} already exists in the database`);
     }
   },
 });
@@ -55,11 +58,12 @@ export const upgradeToPro = mutation({
       .filter((q) => q.eq(q.field("email"), args.email))
       .first();
 
-    if (!user) throw new Error("User not found");
+    if (!user) {
+      throw new Error(`User with email ${args.email} not found`);
+    }
 
     await ctx.db.patch(user._id, {
       isPro: true,
-      proSince: Date.now(),
       lemonSqueezyCustomerId: args.lemonSqueezyCustomerId,
       lemonSqueezyOrderId: args.lemonSqueezyOrderId,
     });
